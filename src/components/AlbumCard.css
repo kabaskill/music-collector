@@ -1,43 +1,42 @@
 .card-container {
   width: 80vw;
-  height: 30vh;
+  max-width: 800px;
+  height: fit-content;
   background-color: var(--background-color);
   border-radius: 15px;
   border: 1px solid black;
   margin: 1vh;
+}
+
+.card-info {
+  height: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--text-color);
   font-size: 0.5em;
-  cursor: pointer;
+  padding-inline: 5%;
+  padding-top: 2vh;
 }
 
 .album-cover {
-  width: auto;
-  height: 90%;
-  padding-right: 2vw;
+  width: 40%;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.album-cover img {
+  width: 100%;
 }
 
 .text-section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-left: 5vw;
-  height: 80%;
   text-align: left;
 }
 
-/* .tracklist {
-  width: 80vw;
-
-  border-radius: 15px;
-  border: 1px solid black;
-  margin: 1vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-color);
-  font-size: 0.5em;
-  cursor: pointer;
-} */
+.hidden {
+  display: none;
+}
