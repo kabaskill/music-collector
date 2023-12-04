@@ -1,0 +1,43 @@
+.card-container {
+  width: 80vw;
+  height: 30vh;
+  background-color: var(--background-color);
+  border-radius: 15px;
+  border: 1px solid black;
+  margin: 1vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 0.5em;
+  cursor: pointer;
+}
+
+.album-cover {
+  width: auto;
+  height: 90%;
+  padding-right: 2vw;
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 5vw;
+  height: 80%;
+  text-align: left;
+}
+
+/* .tracklist {
+  width: 80vw;
+
+  border-radius: 15px;
+  border: 1px solid black;
+  margin: 1vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 0.5em;
+  cursor: pointer;
+} */
