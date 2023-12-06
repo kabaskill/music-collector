@@ -1,0 +1,21 @@
+.form-container {
+  background-color: var(--highlight-color);
+  width: 100%;
+  display: flex;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+}
+
+.form-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}

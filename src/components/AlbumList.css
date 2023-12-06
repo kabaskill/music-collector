@@ -1,0 +1,9 @@
+.album-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.album-list > ul {
+  display: grid;
+  gap: 1rem;
+}
