@@ -1,42 +1,33 @@
 .card-container {
-  width: 80vw;
-  max-width: 800px;
-  height: fit-content;
-  background-color: var(--background-color);
-  border-radius: 15px;
-  border: 1px solid black;
-  margin: 1vh;
-}
-
-.card-info {
-  height: 90%;
+  background-color: var(--highlight-color);
+  padding: 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-color);
-  font-size: 0.5em;
-  padding-inline: 5%;
-  padding-top: 2vh;
+  flex-direction: column;
 }
 
-.album-cover {
-  width: 40%;
-  height: auto;
-  background-color: transparent;
-  border: none;
+.card-info img {
+  width: 100%;
   cursor: pointer;
 }
 
-.album-cover img {
-  width: 100%;
+.card-info > aside {
+  display: grid;
+  gap: 0.2rem;
 }
 
-.text-section {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+.card-text > p {
+  font-size: 0.7em;
+  color: var(--text-color);
 }
 
-.hidden {
-  display: none;
+.card-list-button-image,
+.divider-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.divider-button {
+  color: var(--text-color);
+  cursor: pointer;
 }

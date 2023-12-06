@@ -1,18 +1,12 @@
 .track-list {
-  font-size: 0.5em;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  font-size: 0.7rem;
+  gap: 0.2rem;
 }
 
 .track-list li {
-  width: 85%;
-  background-color: rgb(218, 223, 225);
-  border-radius: 5px;
-  padding-block: 0.5vh;
-  padding-inline: 1vw;
-  margin-bottom: 1vh;
+  background-color: var(--border-color);
   display: flex;
   justify-content: space-between;
+  padding: 0.2rem;
 }
