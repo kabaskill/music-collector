@@ -1,4 +1,4 @@
-import "./SongList.css";
+import "./css/SongList.css";
 
 export default function SongList({ tracks }) {
   return (

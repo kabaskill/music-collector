@@ -1,6 +1,6 @@
-import "./SearchBar.css";
+import "./css/SearchBar.css";
 
-export default function SearchBar({ className, onSubmit }) {
+export default function SearchBar({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault();
     const searchQuery = event.target.input.value;
@@ -10,7 +10,7 @@ export default function SearchBar({ className, onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={className}>
+    <form onSubmit={handleSubmit} className="form-container">
       <input
         name="input"
         id="input"

@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.card-info {
+  position: relative;
+}
+
 .card-info img {
   width: 100%;
   cursor: pointer;
@@ -30,4 +34,11 @@
 .divider-button {
   color: var(--text-color);
   cursor: pointer;
+}
+
+.save-button {
+  width: fit-content;
+  position: absolute;
+  bottom: 3rem;
+  right: 0;
 }

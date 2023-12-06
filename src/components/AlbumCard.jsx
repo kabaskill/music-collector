@@ -1,9 +1,9 @@
-import "./AlbumCard.css";
+import "./css/AlbumCard.css";
 import SongList from "./SongList";
 import Divider from "./Divider";
 import { useState } from "react";
 
-export default function Card({ data }) {
+export default function Card({ data, isSaved, onToggleSave }) {
   const [isHidden, setIsHidden] = useState(true);
   const titleLengthLimit = 18;
 
@@ -21,6 +21,9 @@ export default function Card({ data }) {
           onClick={onClickHandler}
         >
           <img src={data.image.url} alt="album cover" />
+        </button>
+        <button type="button" className="save-button" onClick={onToggleSave}>
+          {isSaved ? "Saved" : "Save"}
         </button>
         <aside className="card-text">
           <h2>

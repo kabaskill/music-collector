@@ -8,9 +8,13 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
 
+  const baseURL = "https://neuefische-spotify-proxy.vercel.app/api/";
+
+  const [savedAlbumIds, setSavedAlbumIds] = useState([]);
+  const [savedAlbums, setSavedAlbums] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
-      const baseURL = "https://neuefische-spotify-proxy.vercel.app/api/";
       const url =
         searchQuery !== "" ? `${baseURL}search?artist=${searchQuery}` : `${baseURL}featured`;
 
@@ -28,23 +32,67 @@ function App() {
     fetchData();
   }, [searchQuery]);
 
+  useEffect(() => {
+    async function fetchSavedAlbums() {
+      if (savedAlbumIds.length === 0) {
+        setSavedAlbums([]);
+        return;
+      }
+
+      try {
+        const savedURL = `${baseURL}albums?ids=${JSON.stringify(savedAlbumIds)}`;
+        const response = await fetch(savedURL);
+        const results = await response.json();
+        setSavedAlbums(results);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchSavedAlbums();
+  }, [savedAlbumIds]);
+
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
   }
 
+  function savedCheckHandler(id) {
+    return savedAlbumIds.includes(id);
+  }
+
+  function saveAlbumHandler(id) {
+    const isAlreadySaved = savedCheckHandler(id);
+
+    if (isAlreadySaved) {
+      const updatedList = savedAlbumIds.filter((savedId) => savedId !== id);
+      setSavedAlbumIds(updatedList);
+    } else {
+      const updatedList = [id, ...savedAlbumIds];
+      setSavedAlbumIds(updatedList);
+    }
+  }
+
+  console.log(savedAlbumIds);
+
   return (
     <div className="app">
       <h1>SpoTiny</h1>
-      <SearchBar className="form-container" onSubmit={handleSearch} />
+      <SearchBar onSubmit={handleSearch} />
       {loading ? (
         <h2>loading</h2>
       ) : (
         <AlbumList
-          className="album-list"
           data={data}
           title={searchQuery !== "" ? `Results for: ${searchQuery}` : "Featured"}
+          onToggleSave={saveAlbumHandler}
+          onSavedCheck={savedCheckHandler}
         />
       )}
+      <AlbumList
+        data={savedAlbums}
+        title="Saved Albums"
+        onToggleSave={saveAlbumHandler}
+        onSavedCheck={savedCheckHandler}
+      />
     </div>
   );
 }
