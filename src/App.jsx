@@ -4,33 +4,32 @@ import SearchBar from "./components/SearchBar";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [searched, setSearched] = useState(false);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const url = searched
-        ? `https://neuefische-spotify-proxy.vercel.app/api/search?artist=${searchQuery}`
-        : "https://neuefische-spotify-proxy.vercel.app/api/featured";
+      const baseURL = "https://neuefische-spotify-proxy.vercel.app/api/";
+      const url =
+        searchQuery !== "" ? `${baseURL}search?artist=${searchQuery}` : `${baseURL}featured`;
 
       try {
         setLoading(true);
         const response = await fetch(url);
         const data = await response.json();
         setData(data);
-        setLoading(false);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
-  }, [searched, searchQuery]);
+  }, [searchQuery]);
 
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
-    setSearched(true);
   }
 
   return (
@@ -43,7 +42,7 @@ function App() {
         <AlbumList
           className="album-list"
           data={data}
-          title={searched ? `Results for: ${searchQuery}` : "Featured"}
+          title={searchQuery !== "" ? `Results for: ${searchQuery}` : "Featured"}
         />
       )}
     </div>

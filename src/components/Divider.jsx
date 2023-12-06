@@ -3,7 +3,7 @@ import "./Divider.css";
 export default function Divider({ onClick }) {
   return (
     <button
-      type="click"
+      type="button"
       aria-label="toggle track list"
       onClick={onClick}
       className="divider-button"
