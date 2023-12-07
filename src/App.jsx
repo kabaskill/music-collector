@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
 
@@ -72,25 +71,13 @@ function App() {
     }
   }
 
-  console.log(savedAlbumIds);
-
   return (
     <div className="app">
       <h1>
         <span className="span-for-spo">spo</span>
         <span className="span-for-t">t</span>iny
       </h1>
-      <SearchBar onSubmit={handleSearch} />
-      {loading ? (
-        <h2>loading</h2>
-      ) : (
-        <AlbumList
-          data={data}
-          title={searchQuery !== "" ? `Results for: ${searchQuery}` : "Featured"}
-          onToggleSave={saveAlbumHandler}
-          onSavedCheck={savedCheckHandler}
-        />
-      )}
+
       <AlbumList
         data={savedAlbums}
         title="Saved Albums"

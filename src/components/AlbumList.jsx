@@ -9,15 +9,11 @@ export default function AlbumList({ data, title, onToggleSave, onSavedCheck }) {
         {data.length > 0 &&
           data.map((item) => (
             <li key={item.id}>
-              {
-                <AlbumCard
-                  data={item}
-                  isSaved={onSavedCheck(item.id)}
-                  onToggleSave={() => {
-                    onToggleSave(item.id);
-                  }}
-                />
-              }
+              <AlbumCard
+                data={item}
+                isSaved={onSavedCheck(item.id)}
+                onToggleSave={() => onToggleSave(item.id)}
+              />
             </li>
           ))}
       </ul>

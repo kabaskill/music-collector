@@ -22,10 +22,10 @@
 }
 
 .card-text > h2 {
-  white-space: nowrap; /* Prevent text from wrapping to the next line */
-  overflow: hidden; /* Hide any content that overflows the container */
-  text-overflow: ellipsis; /* Display an ellipsis (...) when text is truncated */
-  max-width: 100%; /* Optional: Set a maximum width for the container */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .card-text > p {
