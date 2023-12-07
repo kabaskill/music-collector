@@ -1,4 +1,4 @@
-import "./Divider.css";
+import "./css/Divider.css";
 
 export default function Divider({ onClick }) {
   return (
@@ -8,7 +8,7 @@ export default function Divider({ onClick }) {
       onClick={onClick}
       className="divider-button"
     >
-      <span className="divider-button-text">v</span>
+      <span className="divider-button-text">V</span>
     </button>
   );
 }

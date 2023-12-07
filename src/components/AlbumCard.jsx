@@ -1,11 +1,10 @@
-import "./AlbumCard.css";
+import "./css/AlbumCard.css";
 import SongList from "./SongList";
 import Divider from "./Divider";
 import { useState } from "react";
 
-export default function Card({ data }) {
+export default function Card({ data, isSaved, onToggleSave }) {
   const [isHidden, setIsHidden] = useState(true);
-  const titleLengthLimit = 18;
 
   function onClickHandler() {
     setIsHidden(!isHidden);
@@ -22,12 +21,11 @@ export default function Card({ data }) {
         >
           <img src={data.image.url} alt="album cover" />
         </button>
+        <button type="button" className="save-button" onClick={onToggleSave}>
+          {isSaved ? "Saved" : "Save"}
+        </button>
         <aside className="card-text">
-          <h2>
-            {data.title.length > titleLengthLimit
-              ? `${data.title.slice(0, titleLengthLimit)} ...`
-              : data.title}
-          </h2>
+          <h2>{data.title}</h2>
           <h3>{data.artist}</h3>
           <p>{data.release_date.slice(0, 4)}</p>
         </aside>

@@ -1,0 +1,53 @@
+.card-container {
+  background-color: var(--highlight-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+}
+
+.card-info {
+  position: relative;
+}
+
+.card-info img {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 0.625rem;
+}
+
+.card-info > aside {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.card-text > h2 {
+  white-space: nowrap; /* Prevent text from wrapping to the next line */
+  overflow: hidden; /* Hide any content that overflows the container */
+  text-overflow: ellipsis; /* Display an ellipsis (...) when text is truncated */
+  max-width: 100%; /* Optional: Set a maximum width for the container */
+}
+
+.card-text > p {
+  font-size: 0.7rem;
+  color: var(--text-color);
+}
+
+.card-list-button-image,
+.divider-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.divider-button {
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.save-button {
+  position: absolute;
+  bottom: 5rem;
+  right: 0.3rem;
+  font-size: 1.2rem;
+}

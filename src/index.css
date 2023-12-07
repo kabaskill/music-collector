@@ -1,4 +1,4 @@
-*,
+ *,
 ::after,
 ::before {
   box-sizing: border-box;
@@ -10,6 +10,8 @@
   --headline-color: orangered;
   --border-color: rgba(120, 120, 120, 0.6);
   --highlight-color: #00bfef30;
+
+  --logo-size: 3rem;
 }
 
 code {
@@ -34,11 +36,6 @@ ul {
   color: var(--text-color);
   margin: 0;
   padding: 0;
-}
-
-h1 {
-  color: var(--headline-color);
-  margin: 0;
 }
 
 h2,
