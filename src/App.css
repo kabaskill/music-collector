@@ -3,5 +3,24 @@
   display: grid;
   gap: 1rem;
   place-items: center;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+}
+
+h1 {
+  position: relative;
+  color: var(--headline-color);
+  margin: 0;
+  letter-spacing: 0.5rem;
+  font-size: var(--logo-size);
+}
+
+h1 > .span-for-t {
+  position: relative;
+  top: 0rem;
+  font-size: calc(1.5 * var(--logo-size));
+}
+
+h1 > .span-for-spo {
+  position: relative;
+  top: -1.3rem;
 }

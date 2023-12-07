@@ -2,6 +2,7 @@ import "./App.css";
 import AlbumList from "./components/AlbumList";
 import SearchBar from "./components/SearchBar";
 import { useState, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -10,8 +11,8 @@ function App() {
 
   const baseURL = "https://neuefische-spotify-proxy.vercel.app/api/";
 
-  const [savedAlbumIds, setSavedAlbumIds] = useState([]);
-  const [savedAlbums, setSavedAlbums] = useState([]);
+  const [savedAlbumIds, setSavedAlbumIds] = useLocalStorageState("Ids", { defaultValue: [] });
+  const [savedAlbums, setSavedAlbums] = useLocalStorageState("Saved Albums", { defaultValue: [] });
 
   useEffect(() => {
     async function fetchData() {
@@ -75,7 +76,10 @@ function App() {
 
   return (
     <div className="app">
-      <h1>SpoTiny</h1>
+      <h1>
+        <span className="span-for-spo">spo</span>
+        <span className="span-for-t">t</span>iny
+      </h1>
       <SearchBar onSubmit={handleSearch} />
       {loading ? (
         <h2>loading</h2>
