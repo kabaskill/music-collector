@@ -23,6 +23,7 @@ export default function Home({ baseURL, onToggleSave, onSavedCheck }) {
     <>
       <AlbumList
         data={data}
+        itemsOnPage={data.length}
         title="Featured"
         onToggleSave={onToggleSave}
         onSavedCheck={onSavedCheck}

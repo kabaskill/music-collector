@@ -2,13 +2,21 @@ import SearchBar from "./SearchBar";
 import AlbumList from "./AlbumList";
 import { useState, useEffect } from "react";
 
+import { localData } from "../db";
+
 export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
 
+  const [itemsOnPage, setItemsOnPage] = useState(5);
+
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
+  }
+
+  function handleClick() {
+    setItemsOnPage(itemsOnPage + itemsOnPage);
   }
 
   useEffect(() => {
@@ -17,7 +25,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
         return;
       }
 
-      const url = `${baseURL}search?artist=${searchQuery}`;
+      const url = `${baseURL}search?artist=${searchQuery}&offset=${itemsOnPage}`;
 
       try {
         setLoading(true);
@@ -25,6 +33,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
         const data = await response.json();
         setData(data);
       } catch (error) {
+        setData(localData);
         console.error(error);
       } finally {
         setLoading(false);
@@ -34,6 +43,8 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
     fetchData();
   }, [searchQuery]);
 
+  console.log(data.length);
+
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
@@ -42,6 +53,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
       ) : (
         <AlbumList
           data={data}
+          itemsOnPage={itemsOnPage}
           title={
             searchQuery !== "" ? `Results for: ${searchQuery}` : "Let's find some albums shall we?"
           }
@@ -49,6 +61,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
           onSavedCheck={onSavedCheck}
         />
       )}
+      {data.length > itemsOnPage && <button onClick={handleClick}>Gimme More ...</button>}
     </>
   );
 }
