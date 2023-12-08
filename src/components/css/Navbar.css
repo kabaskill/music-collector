@@ -1,0 +1,24 @@
+.nav-bar {
+  background-color: var(--navbar-color);
+
+  height: var(--navbar-size);
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+  position: fixed;
+  bottom: 0px;
+}
+
+.nav-button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--headline-color);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.is-active {
+  color: var(--text-color);
+}
