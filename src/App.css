@@ -3,7 +3,7 @@
   display: grid;
   gap: 1rem;
   place-items: center;
-  margin-top: 1rem;
+  margin-bottom: calc(var(--navbar-size) + 2rem);
 }
 
 h1 {
