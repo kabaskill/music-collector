@@ -6,12 +6,14 @@ import Navbar from "./components/Navbar";
 import Saved from "./components/Saved";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
+import SongList from "./components/SongList";
 
 function App() {
   const pages = {
     home: "HOME",
     search: "SEARCH",
     saved: "SAVED",
+    tracks: "TRACKS",
   };
   const [activePage, setActivePage] = useState(pages.home);
 
@@ -19,6 +21,9 @@ function App() {
 
   const [savedAlbumIds, setSavedAlbumIds] = useLocalStorageState("Ids", { defaultValue: [] });
   const [savedAlbums, setSavedAlbums] = useLocalStorageState("Saved Albums", { defaultValue: [] });
+
+  const [savedTrackIds, setSavedTrackIds] = useLocalStorageState("TrackIds", { defaultValue: [] });
+  const [savedTracks, setSavedTracks] = useLocalStorageState("SavedTracks", { defaultValue: [] });
 
   useEffect(() => {
     async function fetchSavedAlbums() {
@@ -37,10 +42,45 @@ function App() {
       }
     }
     fetchSavedAlbums();
-  }, [savedAlbumIds, setSavedAlbums]);
+  }, [savedAlbumIds]);
 
   function savedCheckHandler(id) {
     return savedAlbumIds.includes(id);
+  }
+
+  function saveAlbumHandler(id) {
+    const isAlreadySaved = savedCheckHandler(id);
+
+    if (isAlreadySaved) {
+      const updatedList = savedAlbumIds.filter((savedId) => savedId !== id);
+      setSavedAlbumIds(updatedList);
+    } else {
+      const updatedList = [id, ...savedAlbumIds];
+      setSavedAlbumIds(updatedList);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchSavedAlbums() {
+      if (savedTrackIds.length === 0) {
+        setSavedTracks([]);
+        return;
+      }
+
+      try {
+        const savedURL = `${baseURL}albums?ids=${JSON.stringify(savedTrackIds)}`;
+        const response = await fetch(savedURL);
+        const results = await response.json();
+        setSavedTracks(results);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchSavedAlbums();
+  }, [savedTrackIds]);
+
+  function savedCheckHandler(id) {
+    return savedTrackIds.includes(id);
   }
 
   function saveAlbumHandler(id) {
@@ -76,6 +116,13 @@ function App() {
           data={savedAlbums}
           onToggleSave={saveAlbumHandler}
           onSavedCheck={savedCheckHandler}
+        />
+      )}
+      {activePage === pages.tracks && (
+        <SongList
+          tracks={savedTracks}
+          onToggleSave={saveTrackHandler}
+          onSavedCheck={saveTrackCheckHandler}
         />
       )}
       <Navbar activePage={activePage} pages={pages} onClick={setActivePage} />

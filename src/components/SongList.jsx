@@ -1,6 +1,6 @@
 import "./css/SongList.css";
 
-export default function SongList({ tracks }) {
+export default function SongList({ tracks, onToggleSave, onSavedCheck }) {
   return (
     <>
       <hr></hr>
@@ -10,6 +10,7 @@ export default function SongList({ tracks }) {
             <span className="text-number">{item.track_number}</span>
             <span className="text-title">{item.name}</span>
             <span className="text-duration">{item.duration}</span>
+            <button></button>
           </li>
         ))}
       </ul>
