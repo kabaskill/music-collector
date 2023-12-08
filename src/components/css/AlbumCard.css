@@ -11,7 +11,7 @@
 }
 
 .card-info img {
-  display: none;
+  /* display: none; */
   /* DISPLAY IS HERE FOR TESTING (e.g I don't wanna scroll all day long) */
   width: 100%;
   cursor: pointer;

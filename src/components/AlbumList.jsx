@@ -1,7 +1,15 @@
 import AlbumCard from "./AlbumCard";
 import "./css/AlbumList.css";
 
-export default function AlbumList({ data, itemsOnPage, title, onToggleSave, onSavedCheck }) {
+export default function AlbumList({
+  data,
+  itemsOnPage,
+  title,
+  onToggleSave,
+  onSavedCheck,
+  onTrackSavedCheck,
+  onToggleTrackSave,
+}) {
   return (
     <div className="album-list">
       <h2 className="album-list-title">{title}</h2>
@@ -15,6 +23,8 @@ export default function AlbumList({ data, itemsOnPage, title, onToggleSave, onSa
                     data={item}
                     isSaved={onSavedCheck(item.id)}
                     onToggleSave={() => onToggleSave(item.id)}
+                    onToggleTrackSave={onToggleTrackSave}
+                    onTrackSavedCheck={onTrackSavedCheck}
                   />
                 </li>
               )

@@ -3,7 +3,13 @@ import SongList from "./SongList";
 import Divider from "./Divider";
 import { useState } from "react";
 
-export default function Card({ data, isSaved, onToggleSave }) {
+export default function Card({
+  data,
+  isSaved,
+  onToggleSave,
+  onTrackSavedCheck,
+  onToggleTrackSave,
+}) {
   const [isHidden, setIsHidden] = useState(true);
 
   function onClickHandler() {
@@ -31,7 +37,13 @@ export default function Card({ data, isSaved, onToggleSave }) {
         </aside>
       </section>
       <Divider onClick={onClickHandler} />
-      {!isHidden && <SongList tracks={data.tracks} />}
+      {!isHidden && (
+        <SongList
+          tracks={data.tracks}
+          onToggleTrackSave={onToggleTrackSave}
+          onTrackSavedCheck={onTrackSavedCheck}
+        />
+      )}
     </div>
   );
 }

@@ -2,9 +2,15 @@ import SearchBar from "./SearchBar";
 import AlbumList from "./AlbumList";
 import { useState, useEffect } from "react";
 
-import { localData } from "../db";
+// import { localData } from "../db";
 
-export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
+export default function Search({
+  baseURL,
+  onSavedCheck,
+  onToggleSave,
+  onTrackSavedCheck,
+  onToggleTrackSave,
+}) {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
@@ -33,7 +39,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
         const data = await response.json();
         setData(data);
       } catch (error) {
-        setData(localData);
+        // setData(localData);
         console.error(error);
       } finally {
         setLoading(false);
@@ -59,6 +65,8 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
           }
           onToggleSave={onToggleSave}
           onSavedCheck={onSavedCheck}
+          onTrackSavedCheck={onTrackSavedCheck}
+          onToggleTrackSave={onToggleTrackSave}
         />
       )}
       {data.length > itemsOnPage && <button onClick={handleClick}>Gimme More ...</button>}

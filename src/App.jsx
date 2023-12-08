@@ -22,7 +22,9 @@ function App() {
   const [savedAlbumIds, setSavedAlbumIds] = useLocalStorageState("Ids", { defaultValue: [] });
   const [savedAlbums, setSavedAlbums] = useLocalStorageState("Saved Albums", { defaultValue: [] });
 
-  const [savedTrackIds, setSavedTrackIds] = useLocalStorageState("TrackIds", { defaultValue: [] });
+  const [savedTrackIds, setSavedTrackIds] = useLocalStorageState("SavedTrackIds", {
+    defaultValue: [],
+  });
   const [savedTracks, setSavedTracks] = useLocalStorageState("SavedTracks", { defaultValue: [] });
 
   useEffect(() => {
@@ -61,14 +63,14 @@ function App() {
   }
 
   useEffect(() => {
-    async function fetchSavedAlbums() {
+    async function fetchSavedTracks() {
       if (savedTrackIds.length === 0) {
         setSavedTracks([]);
         return;
       }
 
       try {
-        const savedURL = `${baseURL}albums?ids=${JSON.stringify(savedTrackIds)}`;
+        const savedURL = `${baseURL}tracks?ids=${JSON.stringify(savedTrackIds)}`;
         const response = await fetch(savedURL);
         const results = await response.json();
         setSavedTracks(results);
@@ -76,22 +78,22 @@ function App() {
         console.error(error);
       }
     }
-    fetchSavedAlbums();
+    fetchSavedTracks();
   }, [savedTrackIds]);
 
-  function savedCheckHandler(id) {
+  function saveTrackCheckHandler(id) {
     return savedTrackIds.includes(id);
   }
 
-  function saveAlbumHandler(id) {
-    const isAlreadySaved = savedCheckHandler(id);
+  function saveTrackHandler(id) {
+    const isAlreadySaved = saveTrackCheckHandler(id);
 
     if (isAlreadySaved) {
-      const updatedList = savedAlbumIds.filter((savedId) => savedId !== id);
-      setSavedAlbumIds(updatedList);
+      const updatedList = savedTrackIds.filter((savedId) => savedId !== id);
+      setSavedTrackIds(updatedList);
     } else {
-      const updatedList = [id, ...savedAlbumIds];
-      setSavedAlbumIds(updatedList);
+      const updatedList = [id, ...savedTrackIds];
+      setSavedTrackIds(updatedList);
     }
   }
 
@@ -102,13 +104,21 @@ function App() {
         <span className="span-for-t">t</span>iny
       </h1>
       {activePage === pages.home && (
-        <Home baseURL={baseURL} onToggleSave={saveAlbumHandler} onSavedCheck={savedCheckHandler} />
+        <Home
+          baseURL={baseURL}
+          onToggleSave={saveAlbumHandler}
+          onSavedCheck={savedCheckHandler}
+          onToggleTrackSave={saveTrackHandler}
+          onTrackSavedCheck={saveTrackCheckHandler}
+        />
       )}
       {activePage === pages.search && (
         <Search
           baseURL={baseURL}
           onToggleSave={saveAlbumHandler}
           onSavedCheck={savedCheckHandler}
+          onToggleTrackSave={saveTrackHandler}
+          onTrackSavedCheck={saveTrackCheckHandler}
         />
       )}
       {activePage === pages.saved && (
@@ -116,14 +126,19 @@ function App() {
           data={savedAlbums}
           onToggleSave={saveAlbumHandler}
           onSavedCheck={savedCheckHandler}
+          onToggleTrackSave={saveTrackHandler}
+          onTrackSavedCheck={saveTrackCheckHandler}
         />
       )}
       {activePage === pages.tracks && (
-        <SongList
-          tracks={savedTracks}
-          onToggleSave={saveTrackHandler}
-          onSavedCheck={saveTrackCheckHandler}
-        />
+        <>
+          <h2>Saved Tracks</h2>
+          <SongList
+            tracks={savedTracks}
+            onToggleTrackSave={saveTrackHandler}
+            onTrackSavedCheck={saveTrackCheckHandler}
+          />
+        </>
       )}
       <Navbar activePage={activePage} pages={pages} onClick={setActivePage} />
     </div>
