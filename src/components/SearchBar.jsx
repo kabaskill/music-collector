@@ -6,7 +6,6 @@ export default function SearchBar({ onSubmit }) {
     const searchQuery = event.target.input.value;
 
     onSubmit(searchQuery);
-    event.target.reset();
   }
 
   return (

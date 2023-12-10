@@ -1,7 +1,13 @@
 import AlbumList from "./AlbumList";
 import { useState, useEffect } from "react";
 
-export default function Home({ baseURL, onToggleSave, onSavedCheck }) {
+export default function Home({
+  baseURL,
+  onToggleSave,
+  onSavedCheck,
+  onTrackSavedCheck,
+  onToggleTrackSave,
+}) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -18,13 +24,16 @@ export default function Home({ baseURL, onToggleSave, onSavedCheck }) {
     }
     fetchData();
   }, []);
-
   return (
     <AlbumList
       data={data}
+      itemsOnPage={data.length}
       title="Featured"
       onToggleSave={onToggleSave}
       onSavedCheck={onSavedCheck}
+      onTrackSavedCheck={onTrackSavedCheck}
+      onToggleTrackSave={onToggleTrackSave}
+
     />
   );
 }

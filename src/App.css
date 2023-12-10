@@ -9,7 +9,7 @@
 h1 {
   position: relative;
   color: var(--headline-color);
-  margin: 0;
+  margin-block: 1rem;
   letter-spacing: 0.5rem;
   font-size: var(--logo-size);
 }
@@ -23,4 +23,31 @@ h1 > .span-for-t {
 h1 > .span-for-spo {
   position: relative;
   top: -1.3rem;
+}
+
+.saved-tracks {
+  width: 100%;
+}
+
+@media (min-width: 801px) {
+  .album-list {
+    max-width: 90%;
+  }
+
+  .album-list > ul {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1201px) {
+  .album-list {
+    max-width: 100%;
+  }
+  .album-list > ul {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 }

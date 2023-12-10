@@ -2,13 +2,28 @@ import SearchBar from "./SearchBar";
 import AlbumList from "./AlbumList";
 import { useState, useEffect } from "react";
 
-export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
+// import { localData } from "../db";
+
+export default function Search({
+  baseURL,
+  onSavedCheck,
+  onToggleSave,
+  onTrackSavedCheck,
+  onToggleTrackSave,
+}) {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
 
+  const [itemsOnPage, setItemsOnPage] = useState(10);
+
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
+    setItemsOnPage(10);
+  }
+
+  function handleClick() {
+    setItemsOnPage(itemsOnPage + itemsOnPage);
   }
 
   useEffect(() => {
@@ -17,7 +32,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
         return;
       }
 
-      const url = `${baseURL}search?artist=${searchQuery}`;
+      const url = `${baseURL}search?artist=${searchQuery}&offset=${itemsOnPage}`;
 
       try {
         setLoading(true);
@@ -25,6 +40,7 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
         const data = await response.json();
         setData(data);
       } catch (error) {
+        // setData(localData);
         console.error(error);
       } finally {
         setLoading(false);
@@ -42,13 +58,17 @@ export default function Search({ baseURL, onSavedCheck, onToggleSave }) {
       ) : (
         <AlbumList
           data={data}
+          itemsOnPage={itemsOnPage}
           title={
             searchQuery !== "" ? `Results for: ${searchQuery}` : "Let's find some albums shall we?"
           }
           onToggleSave={onToggleSave}
           onSavedCheck={onSavedCheck}
+          onTrackSavedCheck={onTrackSavedCheck}
+          onToggleTrackSave={onToggleTrackSave}
         />
       )}
+      {data.length > itemsOnPage && <button onClick={handleClick}>Gimme More ...</button>}
     </>
   );
 }
