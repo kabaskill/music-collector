@@ -11,25 +11,27 @@ export default function AlbumList({
   onToggleTrackSave,
 }) {
   return (
-    <div className="album-list">
+    <>
       <h2 className="album-list-title">{title}</h2>
-      <ul>
-        {data.length > 0 &&
-          data.map(
-            (item, index) =>
-              index < itemsOnPage && (
-                <li key={item.id}>
-                  <AlbumCard
-                    data={item}
-                    isSaved={onSavedCheck(item.id)}
-                    onToggleSave={() => onToggleSave(item.id)}
-                    onToggleTrackSave={onToggleTrackSave}
-                    onTrackSavedCheck={onTrackSavedCheck}
-                  />
-                </li>
-              )
-          )}
-      </ul>
-    </div>
+      <div className="album-list">
+        <ul>
+          {data.length > 0 &&
+            data.map(
+              (item, index) =>
+                index < itemsOnPage && (
+                  <li key={item.id}>
+                    <AlbumCard
+                      data={item}
+                      isSaved={onSavedCheck(item.id)}
+                      onToggleSave={() => onToggleSave(item.id)}
+                      onToggleTrackSave={onToggleTrackSave}
+                      onTrackSavedCheck={onTrackSavedCheck}
+                    />
+                  </li>
+                )
+            )}
+        </ul>
+      </div>
+    </>
   );
 }

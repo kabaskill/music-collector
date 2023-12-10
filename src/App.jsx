@@ -8,13 +8,14 @@ import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import SongList from "./components/SongList";
 
+const pages = {
+  home: "HOME",
+  search: "SEARCH",
+  saved: "SAVED",
+  tracks: "TRACKS",
+};
+
 function App() {
-  const pages = {
-    home: "HOME",
-    search: "SEARCH",
-    saved: "SAVED",
-    tracks: "TRACKS",
-  };
   const [activePage, setActivePage] = useState(pages.home);
 
   const baseURL = "https://neuefische-spotify-proxy.vercel.app/api/";
@@ -98,50 +99,54 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <>
       <h1>
         <span className="span-for-spo">spo</span>
         <span className="span-for-t">t</span>iny
       </h1>
-      {activePage === pages.home && (
-        <Home
-          baseURL={baseURL}
-          onToggleSave={saveAlbumHandler}
-          onSavedCheck={savedCheckHandler}
-          onToggleTrackSave={saveTrackHandler}
-          onTrackSavedCheck={saveTrackCheckHandler}
-        />
-      )}
-      {activePage === pages.search && (
-        <Search
-          baseURL={baseURL}
-          onToggleSave={saveAlbumHandler}
-          onSavedCheck={savedCheckHandler}
-          onToggleTrackSave={saveTrackHandler}
-          onTrackSavedCheck={saveTrackCheckHandler}
-        />
-      )}
-      {activePage === pages.saved && (
-        <Saved
-          data={savedAlbums}
-          onToggleSave={saveAlbumHandler}
-          onSavedCheck={savedCheckHandler}
-          onToggleTrackSave={saveTrackHandler}
-          onTrackSavedCheck={saveTrackCheckHandler}
-        />
-      )}
-      {activePage === pages.tracks && (
-        <>
-          <h2>Saved Tracks</h2>
-          <SongList
-            tracks={savedTracks}
+      <div className="app">
+        {activePage === pages.home && (
+          <Home
+            baseURL={baseURL}
+            onToggleSave={saveAlbumHandler}
+            onSavedCheck={savedCheckHandler}
             onToggleTrackSave={saveTrackHandler}
             onTrackSavedCheck={saveTrackCheckHandler}
           />
-        </>
-      )}
-      <Navbar activePage={activePage} pages={pages} onClick={setActivePage} />
-    </div>
+        )}
+        {activePage === pages.search && (
+          <Search
+            baseURL={baseURL}
+            onToggleSave={saveAlbumHandler}
+            onSavedCheck={savedCheckHandler}
+            onToggleTrackSave={saveTrackHandler}
+            onTrackSavedCheck={saveTrackCheckHandler}
+          />
+        )}
+        {activePage === pages.saved && (
+          <Saved
+            data={savedAlbums}
+            onToggleSave={saveAlbumHandler}
+            onSavedCheck={savedCheckHandler}
+            onToggleTrackSave={saveTrackHandler}
+            onTrackSavedCheck={saveTrackCheckHandler}
+          />
+        )}
+        {activePage === pages.tracks && (
+          <>
+            <h2>Saved Tracks</h2>
+            <div className="saved-tracks">
+              <SongList
+                tracks={savedTracks}
+                onToggleTrackSave={saveTrackHandler}
+                onTrackSavedCheck={saveTrackCheckHandler}
+              />
+            </div>
+          </>
+        )}
+        <Navbar activePage={activePage} pages={pages} onClick={setActivePage} />
+      </div>
+    </>
   );
 }
 

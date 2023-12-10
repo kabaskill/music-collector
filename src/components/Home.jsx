@@ -24,18 +24,15 @@ export default function Home({
     }
     fetchData();
   }, []);
-
   return (
-    <>
-      <AlbumList
-        data={data}
-        itemsOnPage={data.length}
-        title="Featured"
-        onToggleSave={onToggleSave}
-        onSavedCheck={onSavedCheck}
-        onTrackSavedCheck={onTrackSavedCheck}
-        onToggleTrackSave={onToggleTrackSave}
-      />
-    </>
+    <AlbumList
+      data={data}
+      itemsOnPage={data.length}
+      title="Featured"
+      onToggleSave={onToggleSave}
+      onSavedCheck={onSavedCheck}
+      onTrackSavedCheck={onTrackSavedCheck}
+      onToggleTrackSave={onToggleTrackSave}
+    />
   );
 }

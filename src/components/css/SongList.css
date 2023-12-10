@@ -6,7 +6,22 @@
 
 .track-list li {
   background-color: var(--border-color);
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: center;
   padding: 0.2rem;
+  border-radius: 5px;
+}
+
+.text-number {
+  margin-right: 0.5rem;
+}
+
+.text-duration {
+  margin-right: 0.5rem;
+}
+
+.track-list-button {
+  cursor: pointer;
+  width: 1.3rem;
 }

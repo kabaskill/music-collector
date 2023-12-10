@@ -15,10 +15,11 @@ export default function Search({
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
 
-  const [itemsOnPage, setItemsOnPage] = useState(5);
+  const [itemsOnPage, setItemsOnPage] = useState(10);
 
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
+    setItemsOnPage(10);
   }
 
   function handleClick() {
@@ -48,8 +49,6 @@ export default function Search({
 
     fetchData();
   }, [searchQuery]);
-
-  console.log(data.length);
 
   return (
     <>
