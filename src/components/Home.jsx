@@ -20,14 +20,13 @@ export default function Home({ baseURL, onToggleSave, onSavedCheck }) {
   }, []);
 
   return (
-    <>
-      <AlbumList
-        data={data}
-        itemsOnPage={data.length}
-        title="Featured"
-        onToggleSave={onToggleSave}
-        onSavedCheck={onSavedCheck}
-      />
-    </>
+
+    <AlbumList
+      data={data}
+      title="Featured"
+      onToggleSave={onToggleSave}
+      onSavedCheck={onSavedCheck}
+    />
+
   );
 }

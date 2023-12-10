@@ -7,12 +7,13 @@ import Saved from "./components/Saved";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
+const pages = {
+  home: "HOME",
+  search: "SEARCH",
+  saved: "SAVED",
+};
+
 function App() {
-  const pages = {
-    home: "HOME",
-    search: "SEARCH",
-    saved: "SAVED",
-  };
   const [activePage, setActivePage] = useState(pages.home);
 
   const baseURL = "https://neuefische-spotify-proxy.vercel.app/api/";
