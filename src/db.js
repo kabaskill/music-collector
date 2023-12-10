@@ -1,4 +1,4 @@
-export const data = [
+export const localData = [
   {
     id: "5Dbax7G8SWrP9xyzkOvy2F",
     artist: "Pink Floyd",
