@@ -15,6 +15,12 @@ const pages = {
   tracks: "TRACKS",
 };
 
+const pages = {
+  home: "HOME",
+  search: "SEARCH",
+  saved: "SAVED",
+};
+
 function App() {
   const [activePage, setActivePage] = useState(pages.home);
 
