@@ -6,6 +6,14 @@ import Navbar from "./components/Navbar";
 import Saved from "./components/Saved";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
+import SongList from "./components/SongList";
+
+const pages = {
+  home: "HOME",
+  search: "SEARCH",
+  saved: "SAVED",
+  tracks: "TRACKS",
+};
 
 const pages = {
   home: "HOME",
@@ -20,6 +28,11 @@ function App() {
 
   const [savedAlbumIds, setSavedAlbumIds] = useLocalStorageState("Ids", { defaultValue: [] });
   const [savedAlbums, setSavedAlbums] = useLocalStorageState("Saved Albums", { defaultValue: [] });
+
+  const [savedTrackIds, setSavedTrackIds] = useLocalStorageState("SavedTrackIds", {
+    defaultValue: [],
+  });
+  const [savedTracks, setSavedTracks] = useLocalStorageState("SavedTracks", { defaultValue: [] });
 
   useEffect(() => {
     async function fetchSavedAlbums() {
@@ -38,7 +51,7 @@ function App() {
       }
     }
     fetchSavedAlbums();
-  }, [savedAlbumIds, setSavedAlbums]);
+  }, [savedAlbumIds]);
 
   function savedCheckHandler(id) {
     return savedAlbumIds.includes(id);
@@ -56,31 +69,90 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    async function fetchSavedTracks() {
+      if (savedTrackIds.length === 0) {
+        setSavedTracks([]);
+        return;
+      }
+
+      try {
+        const savedURL = `${baseURL}tracks?ids=${JSON.stringify(savedTrackIds)}`;
+        const response = await fetch(savedURL);
+        const results = await response.json();
+        setSavedTracks(results);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchSavedTracks();
+  }, [savedTrackIds]);
+
+  function saveTrackCheckHandler(id) {
+    return savedTrackIds.includes(id);
+  }
+
+  function saveTrackHandler(id) {
+    const isAlreadySaved = saveTrackCheckHandler(id);
+
+    if (isAlreadySaved) {
+      const updatedList = savedTrackIds.filter((savedId) => savedId !== id);
+      setSavedTrackIds(updatedList);
+    } else {
+      const updatedList = [id, ...savedTrackIds];
+      setSavedTrackIds(updatedList);
+    }
+  }
+
   return (
-    <div className="app">
+    <>
       <h1>
         <span className="span-for-spo">spo</span>
         <span className="span-for-t">t</span>iny
       </h1>
-      {activePage === pages.home && (
-        <Home baseURL={baseURL} onToggleSave={saveAlbumHandler} onSavedCheck={savedCheckHandler} />
-      )}
-      {activePage === pages.search && (
-        <Search
-          baseURL={baseURL}
-          onToggleSave={saveAlbumHandler}
-          onSavedCheck={savedCheckHandler}
-        />
-      )}
-      {activePage === pages.saved && (
-        <Saved
-          data={savedAlbums}
-          onToggleSave={saveAlbumHandler}
-          onSavedCheck={savedCheckHandler}
-        />
-      )}
-      <Navbar activePage={activePage} pages={pages} onClick={setActivePage} />
-    </div>
+      <div className="app">
+        {activePage === pages.home && (
+          <Home
+            baseURL={baseURL}
+            onToggleSave={saveAlbumHandler}
+            onSavedCheck={savedCheckHandler}
+            onToggleTrackSave={saveTrackHandler}
+            onTrackSavedCheck={saveTrackCheckHandler}
+          />
+        )}
+        {activePage === pages.search && (
+          <Search
+            baseURL={baseURL}
+            onToggleSave={saveAlbumHandler}
+            onSavedCheck={savedCheckHandler}
+            onToggleTrackSave={saveTrackHandler}
+            onTrackSavedCheck={saveTrackCheckHandler}
+          />
+        )}
+        {activePage === pages.saved && (
+          <Saved
+            data={savedAlbums}
+            onToggleSave={saveAlbumHandler}
+            onSavedCheck={savedCheckHandler}
+            onToggleTrackSave={saveTrackHandler}
+            onTrackSavedCheck={saveTrackCheckHandler}
+          />
+        )}
+        {activePage === pages.tracks && (
+          <>
+            <h2>Saved Tracks</h2>
+            <div className="saved-tracks">
+              <SongList
+                tracks={savedTracks}
+                onToggleTrackSave={saveTrackHandler}
+                onTrackSavedCheck={saveTrackCheckHandler}
+              />
+            </div>
+          </>
+        )}
+        <Navbar activePage={activePage} pages={pages} onClick={setActivePage} />
+      </div>
+    </>
   );
 }
 

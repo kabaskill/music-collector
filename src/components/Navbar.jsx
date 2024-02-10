@@ -11,6 +11,11 @@ export default function Navbar({ onClick, pages, activePage }) {
         activePage={activePage === pages.search}
       />
       <NavbarButton page={pages.saved} onClick={onClick} activePage={activePage === pages.saved} />
+      <NavbarButton
+        page={pages.tracks}
+        onClick={onClick}
+        activePage={activePage === pages.tracks}
+      />
     </nav>
   );
 }

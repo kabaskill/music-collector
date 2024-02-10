@@ -1,7 +1,13 @@
 import AlbumList from "./AlbumList";
 
-export default function Saved({ data, onToggleSave, onSavedCheck }) {
-  const title = data.length > 0 ? "Saved" : "How about adding some albums?";
+export default function Saved({
+  data,
+  onToggleSave,
+  onSavedCheck,
+  onTrackSavedCheck,
+  onToggleTrackSave,
+}) {
+  const title = data.length > 0 ? "Saved" : "How about adding some albums here?";
 
   return (
     <AlbumList
@@ -10,6 +16,9 @@ export default function Saved({ data, onToggleSave, onSavedCheck }) {
       title={title}
       onToggleSave={onToggleSave}
       onSavedCheck={onSavedCheck}
+  onTrackSavedCheck={onTrackSavedCheck}
+      onToggleTrackSave={onToggleTrackSave}
+
     />
   );
 }
