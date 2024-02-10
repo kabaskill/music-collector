@@ -16,8 +16,9 @@ export default function Saved({
       title={title}
       onToggleSave={onToggleSave}
       onSavedCheck={onSavedCheck}
-      onTrackSavedCheck={onTrackSavedCheck}
+  onTrackSavedCheck={onTrackSavedCheck}
       onToggleTrackSave={onToggleTrackSave}
+
     />
   );
 }

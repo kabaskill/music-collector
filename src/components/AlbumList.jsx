@@ -1,6 +1,7 @@
 import AlbumCard from "./AlbumCard";
 import "./css/AlbumList.css";
 
+
 export default function AlbumList({
   data,
   itemsOnPage,
@@ -10,9 +11,11 @@ export default function AlbumList({
   onTrackSavedCheck,
   onToggleTrackSave,
 }) {
+
   return (
     <>
       <h2 className="album-list-title">{title}</h2>
+
       <div className="album-list">
         <ul>
           {data.length > 0 &&
@@ -33,5 +36,6 @@ export default function AlbumList({
         </ul>
       </div>
     </>
+
   );
 }

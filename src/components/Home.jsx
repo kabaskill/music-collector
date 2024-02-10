@@ -25,6 +25,7 @@ export default function Home({
     fetchData();
   }, []);
   return (
+
     <AlbumList
       data={data}
       itemsOnPage={data.length}
@@ -35,5 +36,6 @@ export default function Home({
       onToggleTrackSave={onToggleTrackSave}
 
     />
+
   );
 }
