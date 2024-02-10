@@ -1,5 +1,4 @@
 import "./css/SongList.css";
-import { useState, useEffect } from "react";
 
 export default function SongList({ tracks, onToggleTrackSave, onTrackSavedCheck }) {
   return (

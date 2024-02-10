@@ -25,7 +25,6 @@ export default function Home({
     fetchData();
   }, []);
   return (
-
     <AlbumList
       data={data}
       itemsOnPage={data.length}
@@ -34,8 +33,6 @@ export default function Home({
       onSavedCheck={onSavedCheck}
       onTrackSavedCheck={onTrackSavedCheck}
       onToggleTrackSave={onToggleTrackSave}
-
     />
-
   );
 }
